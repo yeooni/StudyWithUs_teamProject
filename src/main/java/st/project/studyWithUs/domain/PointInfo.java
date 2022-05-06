@@ -19,7 +19,6 @@ public class PointInfo {
     @NotNull
     private Long balance;
 
-
     @Version
     private int version;
 
