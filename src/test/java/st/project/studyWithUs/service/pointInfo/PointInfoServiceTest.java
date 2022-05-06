@@ -27,7 +27,9 @@ public class PointInfoServiceTest {
 
     private static final ExecutorService service =  Executors.newFixedThreadPool(100);
 
-    @Test  //동시성 테스트 ( 입금만 )
+    //동시성 테스트 ( 입금만 )
+    //도메인에서 version 컬럼 없애주고, 리파지토리에서 @Lock 없애면 동시성 이슈 생김
+    @Test
     public void checkDeposit() throws InterruptedException {
         PointInfo pointInfo  = new PointInfo(100L);
 
