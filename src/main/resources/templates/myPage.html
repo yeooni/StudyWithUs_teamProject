@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+<body>
+
+    <div style="margin-top: 100px; text-align: center; ">
+
+        <h1>
+            <p><span th:text="${loginUser.userID}" ></span>님</p>
+        </h1>
+
+        <h1>
+
+            <p> <span th:text="${loginUser.point}"></span>포인트</p>
+        </h1>
+
+
+        <button  onclick="location.href='/'"  >
+            홈
+        </button>
+
+        <button  onclick="location.href='/chargePoint'"  >
+            포인트 충전
+        </button>
+
+        <button  onclick="location.href='/refunds'"  >
+            포인트 환급
+        </button>
+
+        <button onclick="location.href='/adminPage'"  >
+            관리자 페이지
+        </button>
+
+
+    </div>
+
+    <h2 style="text-align: center">마이 스터디 </h2>
+    <hr>
+    <div id="myTeams">
+
+    </div>
+
+
+
+    <script>
+
+        getTeams();
+        function getTeams(){
+            $.ajax({
+                type:"get",
+                url:"/findMyTeams",
+                datatype:'json',
+                success: function(data){
+
+                    var teams = document.getElementById('myTeams');
+
+                    data.forEach(function(team){
+                        let teamName = document.createElement('h3');
+                        teamName.innerHTML = team.teamName;
+                        teamName.setAttribute("style", "text-align:center; margin-top:10px;");
+
+                        let teamContent = document.createElement('div');
+                        teamContent.innerHTML = team.teamDesc;
+                        teamContent.setAttribute("style","text-align:center; " );
+
+                        let currentCount = document.createElement('div');
+                        currentCount.innerHTML = "현재 참여 인원 : " + team.currentCount+'/'+team.headCount;
+                        currentCount.setAttribute("style", "text-align:center; margin-top:3px;");
+
+                        let teamButton1 = document.createElement('button');
+                        teamButton1.innerText = "대화하기";
+                        teamButton1.setAttribute("id", team.tId);
+                        teamButton1.setAttribute("style", "margin-bottom:20px; margin-top:3px;");
+                        teamButton1.addEventListener("click", ()=>{
+
+                            $.ajax({
+
+                               //단체 채팅
+
+                            });
+                        });
+
+                        let teamButton2 = document.createElement('button');
+                        teamButton2.innerText = "화상채팅";
+                        teamButton2.setAttribute("id", team.tId);
+                        teamButton2.setAttribute("style", "margin-bottom:20px; margin-top:3px;");
+                        teamButton2.addEventListener("click", ()=>{
+
+                            $.ajax({
+
+                                //화상 채팅
+
+                            });
+                        });
+
+                        let teamButton3 = document.createElement('button');
+                        teamButton3.innerText = "팀 탈퇴";
+                        teamButton3.setAttribute("style", "margin-bottom:20px; margin-top:3px;");
+                        teamButton3.addEventListener("click", ()=>{
+
+                            $.ajax({
+                                url: "/dropStudyTeam",
+                                type: "GET",
+                                dataType:"json",
+                                data: {
+                                    tId : team.ttID
+                                },
+                                success: function (data){
+                                    alert("팀이 탈퇴 되었습니다. ")
+                                    window.location.replace('/myPage');
+
+                                }, error:function(){
+                                    alert("error");
+                                }
+
+                            });
+                        });
+
+                        let eachTeam = document.createElement('div');
+                        eachTeam.append(teamName);
+                        eachTeam.append(teamContent);
+                        eachTeam.append(currentCount);
+                        eachTeam.append(teamButton1);
+                        eachTeam.append(teamButton2);
+                        eachTeam.append(teamButton3);
+                        eachTeam.setAttribute("style", "text-align:center; margin-top:10px;")
+                        teams.appendChild(eachTeam);
+
+                    });
+                }, error:function(){
+                    alert("error");
+                }
+            })
+        }
+
+    </script>
+</body>
+</html>
