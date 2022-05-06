@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<script>
+    $(document).ready(function () {
+        $("#refunds_btn").on('click', function() {
+            refundsChk();
+        })
+    });
+    function refundsChk() {
+        $.ajax({
+            url: "/refunds",
+            type: "POST",
+            data: {
+                name:$("#name").val(),
+                bank:$("#bank").val(),
+                point:$("#point").val(),
+                account:$("#account").val()
+            },
+            success: function(data){
+                if(data =="포인트가 부족합니다."){
+                    $("#pointCheck").html(data);
+                    $("#pointCheck").attr('color', 'red');
+                }
+                else{
+                    window.location.href = "/";
+                }
+            },
+        });
+    }
+</script>
+<body>
+
+<div style="text-align: center; margin-top: 100px; ">
+
+        <input type="text" id="name"  class="form-control"
+               placeholder="성함" style="margin-top: 10px;" ><br>
+        <input type="text" id="bank"  class="form-control"
+               placeholder="은행" style="margin-top: 10px;" ><br>
+        <input type="text" id="account"  class="form-control"
+               placeholder="계좌번호" style="margin-top: 10px;" ><br>
+        <input type="text" id="point"  class="form-control"
+               placeholder="환급 받으실 포인트 금액" style="margin-top: 10px;" ><br>
+         <font id = "pointCheck" size="2"> </font>
+        <div style="margin-top: 10px;">
+            <button id = "refunds_btn" type="submit" > 환급받기</button>
+        </div>
+
+</div>
+
+
+
+</body>
+</html>

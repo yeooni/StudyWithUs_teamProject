@@ -4,10 +4,7 @@ import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -18,9 +15,20 @@ public class PointInfo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long pID;
 
+
     @NotNull
     private Long balance;
 
-    @NotNull
-    private String version;
+
+    @Version
+    private int version;
+
+    public PointInfo() {
+
+    }
+
+    public PointInfo(Long balance) {
+        this.balance = balance;
+    }
+
 }

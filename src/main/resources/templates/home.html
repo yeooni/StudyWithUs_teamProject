@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<body>
+
+    <div style="margin-top: 100px; text-align: center;">
+        <button type="submit" onclick="location.href='/myPage'"  >
+            마이페이지
+        </button>
+    </div>
+    <div id="Teams" style="margin-top: 30px; ">
+    </div>
+    <script>
+        getTeams();
+        function getTeams(){
+            $.ajax({
+                type:"get",
+                url:"/findAllTeams",
+                success: function(data){
+                    var teams = document.getElementById('Teams');
+                    data.forEach(function(team){
+
+
+                        let teamName = document.createElement('h3');
+                        teamName.innerHTML = team.teamName;
+                        teamName.setAttribute("style", "text-align:center; margin-top:10px;");
+
+                        let teamContent = document.createElement('div');
+                        teamContent.innerHTML = team.teamDesc;
+                        teamContent.setAttribute("style","text-align:center; " );
+
+                        let teamDeposit = document.createElement('div');
+                        teamDeposit.innerHTML = "스터디 참가비 : " + team.depositPoint + "포인트";
+                        teamDeposit.setAttribute("style", "text-align:center; margin-top:3px;");
+
+                        let currentCount = document.createElement('div');
+                        currentCount.innerHTML = "현재인원 : " + team.currentCount+'/'+team.headCount;
+                        currentCount.setAttribute("style", "text-align:center; margin-top:3px;");
+
+                        let teamButton = document.createElement('button');
+                        teamButton.innerText = "스터디 참가하기";
+                        teamButton.setAttribute("style", "margin-bottom:20px; margin-top:3px;");
+
+                        teamButton.addEventListener("click", ()=>{
+                            $.ajax({
+                                url: "/studyDeposit",
+                                type: "GET",
+                                dataType:"json",
+                                data: {
+                                    tId : team.ttID,
+                                    point : team.depositPoint
+                                },
+                                success: function (data){
+                                    if (data==true){
+                                        alert("입금이 완료 되었습니다. 스터디 참가가 가능합니다. ")
+                                        window.location.replace('/myPage');
+                                    }
+                                    else if(data==false){
+                                        alert("잔액이 부족합니다. 포인트를 충전해주세요 ")
+                                        window.location.replace('/chargePoint') ;
+                                    }
+                                }, error:function(){
+                                    alert("error");
+                                }
+                            });
+                        });
+                        let eachTeam = document.createElement('div');
+                        eachTeam.append(teamName);
+                        eachTeam.append(teamContent);
+                        eachTeam.append(teamDeposit)
+                        eachTeam.append(currentCount);
+                        eachTeam.append(teamButton);
+                        eachTeam.setAttribute("style", "text-align:center; margin-top:10px;")
+                        teams.appendChild(eachTeam);
+                    });
+                }, error:function(){
+                    alert("error");
+                }
+            })
+        }
+    </script>
+</body>
+</html>
