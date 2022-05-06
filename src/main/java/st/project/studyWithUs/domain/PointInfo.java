@@ -12,7 +12,7 @@ import javax.persistence.Id;
 @Entity
 @Getter
 @Setter
-public class pointInfo {
+public class PointInfo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
