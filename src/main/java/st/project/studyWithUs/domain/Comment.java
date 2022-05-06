@@ -18,8 +18,9 @@ public class Comment {
 
     @NotNull
     private Long writerUID;
-
+    //eunji
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="cID")
     private Contents contents;
 }
+
