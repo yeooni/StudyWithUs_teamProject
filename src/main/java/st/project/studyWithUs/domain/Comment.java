@@ -22,3 +22,4 @@ public class Comment {
     @JoinColumn(name="cID")
     private Contents contents;
 }
+//eunji
