@@ -30,4 +30,5 @@ public class RefundUserAccount {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="uID")
     private User user;
+
 }
