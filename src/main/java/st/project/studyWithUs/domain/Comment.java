@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Setter
 public class Comment {
 
-    // 커밋 테스트 중입니다~
+    // 커밋 테스트 중입니다~!
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cmID;
