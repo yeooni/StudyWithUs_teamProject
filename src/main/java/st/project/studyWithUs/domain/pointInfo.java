@@ -12,11 +12,11 @@ import javax.persistence.Id;
 @Entity
 @Getter
 @Setter
-public class administrator {
+public class pointInfo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long aID;
+    private Long pID;
 
     @NotNull
     private Long balance;
