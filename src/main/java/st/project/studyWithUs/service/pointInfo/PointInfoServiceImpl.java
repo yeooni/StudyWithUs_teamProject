@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import st.project.studyWithUs.domain.PointInfo;
 import st.project.studyWithUs.domain.RefundUserAccount;
-import st.project.studyWithUs.repository.pointInfo.PointInfoRepository;
-import st.project.studyWithUs.repository.refundAccountRepository.RefundAccountRepository;
+import st.project.studyWithUs.repository.PointInfoRepository;
+import st.project.studyWithUs.repository.RefundAccountRepository;
 
 import javax.transaction.Transactional;
 
@@ -36,7 +36,7 @@ public class PointInfoServiceImpl implements PointInfoService{
     //환급 요청 추가
     @Transactional
     public void addRefundUserAccount(RefundUserAccount refundUserAccount){
-        pointInfoRepository.addRefundUserAccount(refundUserAccount);
+        refundAccountRepository.save(refundUserAccount);
     }
 
     //테스트용

@@ -5,7 +5,7 @@ package st.project.studyWithUs.service.userTeamService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import st.project.studyWithUs.domain.UserTeam;
-import st.project.studyWithUs.repository.userStudyTeamRepository.UserTeamRepository;
+import st.project.studyWithUs.repository.UserTeamRepository;
 
 import javax.transaction.Transactional;
 import java.util.List;
