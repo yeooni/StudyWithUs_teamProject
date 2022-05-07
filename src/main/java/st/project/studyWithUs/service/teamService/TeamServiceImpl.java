@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import st.project.studyWithUs.domain.Team;
-import st.project.studyWithUs.repository.teamRepository.TeamRepository;
+import st.project.studyWithUs.repository.TeamRepository;
 
 import javax.transaction.Transactional;
 import java.util.List;
