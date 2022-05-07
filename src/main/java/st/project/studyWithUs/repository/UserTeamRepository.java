@@ -1,4 +1,4 @@
-package st.project.studyWithUs.repository.userStudyTeamRepository;
+package st.project.studyWithUs.repository;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;

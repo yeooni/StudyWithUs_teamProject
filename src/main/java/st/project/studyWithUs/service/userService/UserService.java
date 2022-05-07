@@ -12,4 +12,7 @@ public interface UserService {
 
     boolean checkPoint(Long point, Long uId); // 포인트 삭감 여부
 
+    User login(String id, String pw);
+
+    User getNameEmail(String nickname, String email);
 }
